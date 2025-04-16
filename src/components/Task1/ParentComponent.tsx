@@ -2,6 +2,7 @@ import { Button, Card, Space, Typography } from "antd";
 
 import { useState } from "react";
 import ChildComponent from "./ChildComponent";
+import SiblingComponent from "./SiblingComponent";
 
 // const { Title, Text } = Typography;
 const { Text } = Typography;
@@ -26,7 +27,7 @@ const ParentComponent = () => {
 		  </Space>
 		  
 		  <ChildComponent name="дорогой друг" counter={counter} />
-		  {/* <SiblingComponent /> */}
+		  <SiblingComponent />
 		</Space>
 	  </Card>
 	);

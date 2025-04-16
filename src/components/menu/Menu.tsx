@@ -19,7 +19,12 @@ const items = [
   },
 ];
 
-const Menu = () => {
+type TMenuProps = {
+	selectedKey: string;
+	onSelect: (key: string) => void;
+  };
+
+const Menu = ({ selectedKey, onSelect }: TMenuProps) => {
 	const [collapsed, setCollapsed] = useState(false);
 
 	const toggleCollapsed = () => {
@@ -37,17 +42,17 @@ const Menu = () => {
 		  }}>
 		<Button 
         type="primary" 
-        onClick={toggleCollapsed} 
+        onClick={toggleCollapsed}
         style={{ 
-          margin: '16px',
-          width: collapsed ? 48 : 'calc(100% - 32px)',
+			margin: '16px',
+			width: collapsed ? 48 : 'calc(100% - 32px)',
         }}
-      >
+		>
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </Button>
 		<CustomMenu
-		  defaultSelectedKeys={['1']}
-		  defaultOpenKeys={['sub1']}
+          selectedKeys={[selectedKey]}
+		  onSelect={({ key }) => onSelect(key)}
 		  mode="inline"
 		  theme="dark"
 		  inlineCollapsed={collapsed}

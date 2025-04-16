@@ -1,14 +1,15 @@
+import InProgress from './components/InProgress/InProgress'
 import Menu from './components/menu/Menu'
+import ParentComponent from './components/Task1/ParentComponent'
 import './styles/App.css'
 
 function App() {
 
   return (
     <>
-      <h1>
-        Start React Module
-      </h1>
       <Menu/>
+      <ParentComponent/>
+      <InProgress/>
     </>
   )
 }

@@ -14,6 +14,11 @@ const items = [
   },
   { 
 	key: '2',
+	label: 'Task 2',
+    icon: <TagsOutlined/>,
+  },
+  { 
+	key: '100',
 	label: 'In progress',
     icon: <TagsOutlined/>,
   },

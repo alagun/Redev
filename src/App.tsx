@@ -3,6 +3,7 @@ import InProgress from './components/InProgress/InProgress'
 import Menu from './components/menu/Menu'
 import ParentComponent from './components/Task1/ParentComponent'
 import Task2 from './components/Task2/Task2';
+import Task3 from './components/Task3/Task3';
 
 import './styles/App.css'
 
@@ -16,6 +17,8 @@ function App() {
         return <ParentComponent />;
       case '2':
         return <Task2 />;
+      case '3':
+        return <Task3 />;
       case '100':
         return <InProgress />;
       default:

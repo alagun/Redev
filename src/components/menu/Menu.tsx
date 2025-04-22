@@ -18,6 +18,11 @@ const items = [
     icon: <TagsOutlined/>,
   },
   { 
+	key: '3',
+	label: 'Task 3',
+    icon: <TagsOutlined/>,
+  },
+  { 
 	key: '100',
 	label: 'In progress',
     icon: <TagsOutlined/>,

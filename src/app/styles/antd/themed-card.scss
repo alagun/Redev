@@ -1,0 +1,32 @@
+.ant-card {
+	background: var(--bg-contrasted) !important;
+	color: var(--text-contrasted) !important;
+	border-color: var(--border-color) !important;
+	transition: all var(--transition-duration) var(--transition-timing-fn);
+  
+	.ant-card-head {
+	  background: var(--bg-contrasted) !important;
+	  color: var(--text-contrasted) !important;
+	  border-color: var(--border-color) !important;
+	}
+  
+	.ant-card-body {
+	  background: var(--bg-contrasted) !important;
+	  color: var(--text-contrasted) !important;
+
+	  .ant-typography {
+		background: var(--bg-contrasted) !important;
+		color: var(--text-contrasted) !important;
+	  }
+	}
+  
+	.ant-card-actions {
+	  background: var(--bg-contrasted) !important;
+	  border-top-color: var(--border-color) !important;
+	  
+	  li {
+		color: var(--text-contrasted);
+		border-color: var(--border-color) !important;
+	  }
+	}
+  }

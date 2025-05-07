@@ -1,0 +1,85 @@
+@use "../../../app/styles/themes/light" as light;
+@use "../../../app/styles/themes/dark" as dark;
+
+.menuContainer {
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 100;
+	display: flex;
+	flex-direction: column;
+
+  .menuBtn{
+    background: var(--bg-menu) !important;
+    transition: 
+      background-color var(--transition-duration) var(--transition-timing-fn),
+  }
+
+  :global {
+    transition: 
+      background-color var(--transition-duration) var(--transition-timing-fn),
+      border-color var(--transition-duration) var(--transition-timing-fn);
+
+    .ant-menu {
+      &-dark {
+        background: var(--bg-menu) !important;
+        border-right: 1px solid var(--border-color) !important;
+        transition: 
+          background-color var(--transition-duration) var(--transition-timing-fn),
+          border-color var(--transition-duration) var(--transition-timing-fn);
+        
+        .ant-menu-item {
+          color: var(--text-primary) !important;
+
+          transition: 
+            color var(--transition-duration) var(--transition-timing-fn),
+            background-color var(--transition-duration) var(--transition-timing-fn);
+          
+          &:hover:not(.ant-menu-item-selected) {
+            background: var(--bg-btn-hovered) !important;
+            color: var(--text-primary-hovered) !important;
+          }
+          
+          &-selected {
+            background: var(--bg-btn) !important;
+            color: var(--text-primary) !important;
+            
+            &::after {
+              border-right: 3px solid var(--bg-btn-hovered) !important;
+              transition: border-color var(--transition-duration) var(--transition-timing-fn);
+            }
+            
+            &:hover {
+              background: var(--bg-btn-hovered) !important;
+            }
+          }
+          
+          &-disabled {
+            color: var(--text-primary-disabled) !important;
+            background: transparent !important;
+          }
+        }
+        
+        .ant-menu-submenu {
+          &-title {
+            color: var(--text-primary) !important;
+            transition: color var(--transition-duration) var(--transition-timing-fn);
+            
+            &:hover {
+              color: var(--text-primary-hovered) !important;
+            }
+          }
+          
+          &-arrow {
+            color: var(--text-primary) !important;
+            opacity: 0.65;
+            transition: 
+              color var(--transition-duration) var(--transition-timing-fn),
+              opacity var(--transition-duration) var(--transition-timing-fn);
+          }
+        }
+      }
+    }
+  }
+}

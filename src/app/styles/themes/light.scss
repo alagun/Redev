@@ -1,0 +1,26 @@
+@use "../_variables" as vars;
+
+@mixin theme {
+  @include vars.export-variables;
+  //  ------------------------------------ PRIMARY ------------------------------------
+
+  // Text
+  --text-primary: rgba(var(--theme-dark), var(--transparency-87));
+  --text-primary-hovered: rgba(var(--theme-dark), var(--transparency-75));
+  --text-primary-disabled: rgba(var(--theme-dark), var(--transparency-50));
+  --text-contrasted: rgba(var(--theme-light), var(--transparency-87));
+  --text-contrasted-hovered: rgba(var(--theme-light), var(--transparency-75));
+  --text-contrasted-disabled: rgba(var(--theme-light), var(--transparency-50));
+
+  // Background
+  --bg-primary: rgba(var(--theme-light));
+  --bg-primary-hovered: rgba(var(--theme-light), var(--transparency-75));
+  --bg-primary-disabled: rgba(var(--theme-light), var(--transparency-50));
+  --bg-contrasted: rgba(var(--theme-dark));
+  --bg-contrasted-hovered: rgba(var(--theme-dark), var(--transparency-75));
+  --bg-contrasted-disabled: rgba(var(--theme-dark), var(--transparency-50));
+  --bg-menu: rgba(var(--theme-dark), var(--transparency-45));
+  --bg-btn: rgb(var(--primary-btn));
+  --bg-btn-hovered: rgba(var(--primary-btn), var(--transparency-75));
+  --bg-btn-disabled: rgba(var(--primary-btn), var(--transparency-45));
+}

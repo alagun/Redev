@@ -1,0 +1,13 @@
+.switchContainer{
+	padding: 16px;
+	border-top: 1px solid var(--border-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: border-color var(--transition-duration) var(--transition-timing-fn);
+	
+    background: var(--bg-menu) !important;
+	transition: 
+	  background-color var(--transition-duration) var(--transition-timing-fn),
+	  box-shadow var(--transition-duration) var(--transition-timing-fn);
+}

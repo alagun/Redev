@@ -8,42 +8,21 @@ import {
 import { ThemeSwitch } from '@/shared/theme-switch'
 
 import styles from './Menu.module.scss'
-
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const items = [
-  {
-    key: '1',
-    label: 'Task 1',
-    icon: <TagsOutlined/>,
-  },
-  {
-    key: '2',
-    label: 'Task 2',
-    icon: <TagsOutlined/>,
-  },
-  {
-    key: '3',
-    label: 'Task 3',
-    icon: <TagsOutlined/>,
-  },
-  {
-    key: '4',
-    label: 'Task 4',
-    icon: <TagsOutlined/>,
-  },
-  {
-    key: '100',
-    label: 'In progress',
-    icon: <TagsOutlined/>,
-  },
+  { key: '/', label: 'Task 1', icon: <TagsOutlined /> },
+  { key: 'lifecycle', label: 'Task 2', icon: <TagsOutlined /> },
+  { key: 'list', label: 'Task 3', icon: <TagsOutlined /> },
+  { key: 'theme', label: 'Task 4', icon: <TagsOutlined /> },
+  { key: 'registration', label: 'Task 5', icon: <TagsOutlined /> },
+  { key: 'in-progress', label: 'In progress', icon: <TagsOutlined /> },
 ]
 
-type TMenuProps = {
-  selectedKey: string;
-  onSelect: (key: string) => void;
-};
+const Menu = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
 
-const Menu = ({ selectedKey, onSelect }: TMenuProps) => {
   const [collapsed, setCollapsed] = useState(false)
 
   const toggleCollapsed = () => {
@@ -65,8 +44,8 @@ const Menu = ({ selectedKey, onSelect }: TMenuProps) => {
         </Button>
       </div>
       <CustomMenu
-        selectedKeys={[selectedKey]}
-        onSelect={({ key }) => onSelect(key)}
+        selectedKeys={[location.pathname.split('/')[1] || '/']}
+        onSelect={({ key }) => navigate(key)}
         mode='inline'
         theme='dark'
         inlineCollapsed={collapsed}

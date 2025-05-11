@@ -14,7 +14,9 @@
 	  background: var(--bg-contrasted) !important;
 	  color: var(--text-contrasted) !important;
 
-	  .ant-typography {
+	  .ant-typography,
+	  .ant-form-item-label label,
+	  .ant-radio-label {
 		background: var(--bg-contrasted) !important;
 		color: var(--text-contrasted) !important;
 	  }

@@ -7,6 +7,7 @@ import { InProgress } from '@/feature/component-in-progress'
 import { ListTask } from '@/feature/list-task'
 import { ThemeToggle } from '@/feature/theme-toggle'
 import { NotFoundPage } from '@/pages/not-found'
+import { CribRoadmap } from '@/feature/crib-roadmap'
 
 export const router = createBrowserRouter(
   [
@@ -21,6 +22,13 @@ export const router = createBrowserRouter(
         { path: 'theme', element: <ThemeToggle /> },
         { path: 'in-progress', element: <InProgress /> },
         { path: 'registration', element: <RegistrationPage /> },
+      ],
+    },
+    {
+      path: '/crib',
+      element: <App />,
+      children: [
+        { path: 'roadmap', element: <CribRoadmap /> },
       ],
     },
     {

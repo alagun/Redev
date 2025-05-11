@@ -1,22 +1,59 @@
+import React from 'react'
 import { useState } from 'react'
-import { Button, Menu as CustomMenu } from 'antd'
+import { Button, Menu as CustomMenu, MenuProps } from 'antd'
 import {
   TagsOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  FileOutlined,
+  FolderOutlined,
 } from '@ant-design/icons'
 import { ThemeSwitch } from '@/shared/theme-switch'
 
 import styles from './Menu.module.scss'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const items = [
+type MenuItem = Required<MenuProps>['items'][number];
+
+function getItem (
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+  type?: 'group',
+): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  } as MenuItem
+}
+
+const mainItems = [
   { key: '/', label: 'Task 1', icon: <TagsOutlined /> },
   { key: 'lifecycle', label: 'Task 2', icon: <TagsOutlined /> },
   { key: 'list', label: 'Task 3', icon: <TagsOutlined /> },
   { key: 'theme', label: 'Task 4', icon: <TagsOutlined /> },
   { key: 'registration', label: 'Task 5', icon: <TagsOutlined /> },
-  { key: 'in-progress', label: 'In progress', icon: <TagsOutlined /> },
+]
+
+const cribItems = [
+  { key: 'crib/roadmap', label: 'Roadmap React/Redux', icon: <FileOutlined /> },
+  { key: 'crib/react', label: 'React Basics', icon: <FileOutlined /> },
+  { key: 'crib/components', label: 'Components', icon: <FileOutlined /> },
+  { key: 'crib/hooks', label: 'Hooks', icon: <FileOutlined /> },
+  { key: 'crib/router', label: 'Router', icon: <FileOutlined /> },
+  { key: 'crib/state', label: 'State Management', icon: <FileOutlined /> },
+]
+
+const items: MenuItem[] = [
+  ...mainItems.map(item => getItem(item.label, item.key, item.icon)),
+  getItem('Task 6', 'crib', <FolderOutlined />, [
+    ...cribItems.map(item => getItem(item.label, item.key, item.icon)),
+  ]),
+  getItem('In Progress', 'in-progress', <TagsOutlined />),
 ]
 
 const Menu = () => {
@@ -28,6 +65,11 @@ const Menu = () => {
   const toggleCollapsed = () => {
     setCollapsed(!collapsed)
   }
+
+  const pathParts = location.pathname.split('/').filter(Boolean)
+  const selectedKeys = pathParts.length > 1 && pathParts[0] === 'crib'
+    ? [`crib/${pathParts[1]}`]
+    : [pathParts[0] || '/']
 
   return (
     <div className={styles.menuContainer}>
@@ -44,7 +86,7 @@ const Menu = () => {
         </Button>
       </div>
       <CustomMenu
-        selectedKeys={[location.pathname.split('/')[1] || '/']}
+        selectedKeys={selectedKeys}
         onSelect={({ key }) => navigate(key)}
         mode='inline'
         theme='dark'

@@ -1,5 +1,5 @@
-import { schema } from './lib/ValidationSchema'
+import { registrationSchema } from './lib/ValidationSchema'
 import { RegistrationForm } from './ui/RegistrationForm'
 
 export { RegistrationForm }
-export { schema }
+export { registrationSchema }

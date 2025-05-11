@@ -32,3 +32,11 @@
 	  }
 	}
   }
+
+  .ant-menu {
+	&-dark {
+	  .ant-menu-inline{
+			background: var(--bg-menu) !important;
+		}
+	}
+  }

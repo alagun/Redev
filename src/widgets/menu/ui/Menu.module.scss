@@ -2,7 +2,7 @@
 @use "../../../app/styles/themes/dark" as dark;
 
 .menuContainer {
-	position: fixed;
+  position: fixed;
 	left: 0;
 	top: 0;
 	bottom: 0;
@@ -14,14 +14,14 @@
     background: var(--bg-menu) !important;
     transition: 
       background-color var(--transition-duration) var(--transition-timing-fn),
-  }
-
-  :global {
-    transition: 
+    }
+    
+    :global {
+      transition: 
       background-color var(--transition-duration) var(--transition-timing-fn),
       border-color var(--transition-duration) var(--transition-timing-fn);
-
-    .ant-menu {
+      
+      .ant-menu {
       &-dark {
         background: var(--bg-menu) !important;
         border-right: 1px solid var(--border-color) !important;

@@ -3,8 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, DatePicker, Form, Input, Radio, Modal } from 'antd'
 import dayjs from 'dayjs'
 
-import { schema } from '../lib/ValidationSchema'
-import { IRegistrationForm } from '../models/registration'
+import { registrationSchema } from '../lib/ValidationSchema'
+import { TRegistrationForm } from '../models/registration'
 
 import styles from './RegistrationForm.module.scss'
 
@@ -14,19 +14,19 @@ export const RegistrationForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(registrationSchema),
     defaultValues: {
       username: '',
       email: '',
       password: '',
       confirmPassword: '',
       birthDate: undefined,
-      gender: '',
+      gender: 'male',
       phone: '',
     },
   })
 
-  const onSubmit = (data: IRegistrationForm) => {
+  const onSubmit = (data: TRegistrationForm) => {
     Modal.success({
       title: 'Успешная регистрация!',
       content: (

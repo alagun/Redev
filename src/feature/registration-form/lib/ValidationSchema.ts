@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export const schema = yup.object().shape({
+export const registrationSchema = yup.object().shape({
   username: yup.string().required('Имя пользователя обязательно'),
   email: yup.string().email('Некорректный email').required('Email обязателен'),
   password: yup
@@ -13,6 +13,6 @@ export const schema = yup.object().shape({
     .oneOf([yup.ref('password')], 'Пароли должны совпадать')
     .required('Подтвердите пароль'),
   birthDate: yup.date().required('Дата рождения обязательна'),
-  gender: yup.string().required('Укажите пол'),
+  gender: yup.string().oneOf(['male', 'female'] as const).required('Укажите пол'),
   phone: yup.string().required('Номер телефона обязателен'),
 })

@@ -1,9 +1,4 @@
-export interface IRegistrationForm {
-	username: string,
-	email: string,
-	password: string,
-	confirmPassword: string,
-	birthDate: Date | undefined,
-	gender: string,
-	phone: string,
-}
+import * as yup from 'yup'
+import { registrationSchema } from '../lib/ValidationSchema'
+
+export type TRegistrationForm = yup.InferType<typeof registrationSchema>;

@@ -1,0 +1,20 @@
+.ant-list{
+	background: var(--bg-contrasted) !important;
+	color: var(--text-contrasted) !important;
+
+	.ant-list-item-meta-description{
+		background: var(--bg-contrasted) !important;
+		color: var(--text-contrasted) !important;
+	}
+
+	.ant-typography{
+		ul {
+			list-style: none;
+			padding-left: 0;
+			
+			li {
+			  margin-bottom: 8px;
+			}
+		  }
+	  }
+}

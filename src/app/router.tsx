@@ -8,6 +8,8 @@ import { ListTask } from '@/feature/list-task'
 import { ThemeToggle } from '@/feature/theme-toggle'
 import { NotFoundPage } from '@/pages/not-found'
 import { CribRoadmap } from '@/feature/crib-roadmap'
+import { Introduction } from '@/pages/crib/introduction'
+import { ProjectStructure } from '@/pages/crib/project-structure'
 
 export const router = createBrowserRouter(
   [
@@ -29,6 +31,8 @@ export const router = createBrowserRouter(
       element: <App />,
       children: [
         { path: 'roadmap', element: <CribRoadmap /> },
+        { path: 'react', element: <Introduction /> },
+        { path: 'structure', element: <ProjectStructure /> },
       ],
     },
     {

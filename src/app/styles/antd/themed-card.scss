@@ -20,6 +20,17 @@
 		background: var(--bg-contrasted) !important;
 		color: var(--text-contrasted) !important;
 	  }
+
+	  .ant-typography{
+		ul {
+			list-style: none;
+			padding-left: 0;
+			
+			li {
+			  margin-bottom: 8px;
+			}
+		  }
+	  }
 	}
   
 	.ant-card-actions {

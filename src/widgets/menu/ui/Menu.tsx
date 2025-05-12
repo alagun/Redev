@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Button, Menu as CustomMenu, MenuProps } from 'antd'
 import {
   TagsOutlined,
@@ -11,7 +12,6 @@ import {
 import { ThemeSwitch } from '@/shared/theme-switch'
 
 import styles from './Menu.module.scss'
-import { useLocation, useNavigate } from 'react-router-dom'
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -40,12 +40,13 @@ const mainItems = [
 ]
 
 const cribItems = [
-  { key: 'crib/roadmap', label: 'Roadmap React/Redux', icon: <FileOutlined /> },
-  { key: 'crib/react', label: 'React Basics', icon: <FileOutlined /> },
-  { key: 'crib/components', label: 'Components', icon: <FileOutlined /> },
-  { key: 'crib/hooks', label: 'Hooks', icon: <FileOutlined /> },
-  { key: 'crib/router', label: 'Router', icon: <FileOutlined /> },
-  { key: 'crib/state', label: 'State Management', icon: <FileOutlined /> },
+  { key: 'roadmap', label: 'Roadmap React/Redux', icon: <FileOutlined /> },
+  { key: 'react', label: 'React Basics', icon: <FileOutlined /> },
+  { key: 'structure', label: 'React structure', icon: <FileOutlined /> },
+  { key: 'virtualdom', label: 'VirtualDOM', icon: <FileOutlined /> },
+  { key: 'components', label: 'Components', icon: <FileOutlined /> },
+  { key: 'state', label: 'State Management', icon: <FileOutlined /> },
+  { key: 'router', label: 'Router', icon: <FileOutlined /> },
 ]
 
 const items: MenuItem[] = [
@@ -64,6 +65,12 @@ const Menu = () => {
 
   const toggleCollapsed = () => {
     setCollapsed(!collapsed)
+  }
+
+  const onMenuSelect = ({ keyPath }: { keyPath: string[] }) => {
+    const fullPath = keyPath.reverse().join('/')
+
+    navigate(`/${fullPath}`)
   }
 
   const pathParts = location.pathname.split('/').filter(Boolean)
@@ -87,7 +94,7 @@ const Menu = () => {
       </div>
       <CustomMenu
         selectedKeys={selectedKeys}
-        onSelect={({ key }) => navigate(key)}
+        onSelect={onMenuSelect}
         mode='inline'
         theme='dark'
         inlineCollapsed={collapsed}

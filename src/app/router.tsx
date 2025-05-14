@@ -14,6 +14,7 @@ import { VirtualDOM } from '@/pages/crib/virtual-dom'
 import { CribComponents } from '@/pages/crib/components'
 import { CribProps } from '@/pages/crib/props'
 import { CribState } from '@/pages/crib/state'
+import { CribLifecycle } from '@/pages/crib/lifecycle'
 
 export const router = createBrowserRouter(
   [
@@ -41,7 +42,7 @@ export const router = createBrowserRouter(
         { path: 'components', element: <CribComponents /> },
         { path: 'props', element: <CribProps /> },
         { path: 'state', element: <CribState /> },
-        // { path: 'lifecycle', element: < /> },
+        { path: 'lifecycle', element: <CribLifecycle /> },
         // { path: 'events', element: < /> },
         // { path: 'advanced', element: < /> },
         // { path: 'context', element: < /> },

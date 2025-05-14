@@ -11,6 +11,7 @@ import { CribRoadmap } from '@/feature/crib-roadmap'
 import { Introduction } from '@/pages/crib/introduction'
 import { ProjectStructure } from '@/pages/crib/project-structure'
 import { VirtualDOM } from '@/pages/crib/virtual-dom'
+import { CribComponents } from '@/pages/crib/components'
 import { CribState } from '@/pages/crib/state'
 
 export const router = createBrowserRouter(
@@ -36,7 +37,7 @@ export const router = createBrowserRouter(
         { path: 'react', element: <Introduction /> },
         { path: 'structure', element: <ProjectStructure /> },
         { path: 'virtualdom', element: <VirtualDOM /> },
-        // { path: 'components', element: <CribState /> },
+        { path: 'components', element: <CribComponents /> },
         // { path: 'props', element: < /> },
         { path: 'state', element: <CribState /> },
         // { path: 'lifecycle', element: < /> },

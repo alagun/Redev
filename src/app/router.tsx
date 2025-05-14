@@ -17,6 +17,7 @@ import { CribState } from '@/pages/crib/state'
 import { CribLifecycle } from '@/pages/crib/lifecycle'
 import { CribEvents } from '@/pages/crib/events'
 import { CribAdvanced } from '@/pages/crib/advanced'
+import { CribContext } from '@/pages/crib/context'
 
 export const router = createBrowserRouter(
   [
@@ -47,7 +48,7 @@ export const router = createBrowserRouter(
         { path: 'lifecycle', element: <CribLifecycle /> },
         { path: 'events', element: <CribEvents /> },
         { path: 'advanced', element: <CribAdvanced /> },
-        // { path: 'context', element: < /> },
+        { path: 'context', element: <CribContext /> },
         // { path: 'router', element: < /> },
         // { path: 'forms', element: < /> },
         // { path: 'storage', element: < /> },

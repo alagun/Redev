@@ -50,6 +50,11 @@ html::-webkit-scrollbar {
   transition: all var(--transition-duration) var(--transition-timing-fn);
 }
 
+.main{
+  max-width: 60%;
+  margin-left: 15%;
+}
+
 a {
   font-weight: 500;
   color: #646cff;

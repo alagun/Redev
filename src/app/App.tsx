@@ -7,7 +7,7 @@ function App () {
     <div className={'wrapper'}>
       <div className={'app'}>
         <Menu/>
-        <div>
+        <div className={'main'}>
           <Outlet />
         </div>
       </div>

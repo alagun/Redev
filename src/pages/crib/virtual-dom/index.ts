@@ -1,3 +1,3 @@
-import CribVirtualDOM from './ui/CribVirtualDOM'
+import VirtualDOM from './ui/CribVirtualDOM'
 
-export { CribVirtualDOM }
+export { VirtualDOM }

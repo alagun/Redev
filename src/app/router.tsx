@@ -10,6 +10,7 @@ import { NotFoundPage } from '@/pages/not-found'
 import { CribRoadmap } from '@/feature/crib-roadmap'
 import { Introduction } from '@/pages/crib/introduction'
 import { ProjectStructure } from '@/pages/crib/project-structure'
+import VirtualDOM from '@/pages/crib/virtual-dom/ui/CribVirtualDOM'
 
 export const router = createBrowserRouter(
   [
@@ -33,6 +34,18 @@ export const router = createBrowserRouter(
         { path: 'roadmap', element: <CribRoadmap /> },
         { path: 'react', element: <Introduction /> },
         { path: 'structure', element: <ProjectStructure /> },
+        { path: 'virtualdom', element: <VirtualDOM /> },
+        // { path: 'components', element: < /> },
+        // { path: 'props', element: < /> },
+        // { path: 'state', element: < /> },
+        // { path: 'lifecycle', element: < /> },
+        // { path: 'events', element: < /> },
+        // { path: 'advanced', element: < /> },
+        // { path: 'context', element: < /> },
+        // { path: 'router', element: < /> },
+        // { path: 'forms', element: < /> },
+        // { path: 'storage', element: < /> },
+        // { path: 'hoc', element: < /> },
       ],
     },
     {

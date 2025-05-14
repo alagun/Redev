@@ -42,11 +42,19 @@ const mainItems = [
 const cribItems = [
   { key: 'roadmap', label: 'Roadmap React/Redux', icon: <FileOutlined /> },
   { key: 'react', label: 'React Basics', icon: <FileOutlined /> },
-  { key: 'structure', label: 'React structure', icon: <FileOutlined /> },
+  { key: 'structure', label: 'React Structure', icon: <FileOutlined /> },
   { key: 'virtualdom', label: 'VirtualDOM', icon: <FileOutlined /> },
   { key: 'components', label: 'Components', icon: <FileOutlined /> },
+  { key: 'props', label: 'Props', icon: <FileOutlined /> },
   { key: 'state', label: 'State Management', icon: <FileOutlined /> },
-  { key: 'router', label: 'Router', icon: <FileOutlined /> },
+  { key: 'lifecycle', label: 'React Class component', icon: <FileOutlined /> },
+  { key: 'events', label: 'Events', icon: <FileOutlined /> },
+  { key: 'advanced', label: 'React Advanced', icon: <FileOutlined /> },
+  { key: 'context', label: 'Context', icon: <FileOutlined /> },
+  { key: 'router', label: 'React Router V6', icon: <FileOutlined /> },
+  { key: 'forms', label: 'react-hook-form vs Formik', icon: <FileOutlined /> },
+  { key: 'storage', label: 'STORAGE', icon: <FileOutlined /> },
+  { key: 'hoc', label: 'HOC', icon: <FileOutlined /> },
 ]
 
 const items: MenuItem[] = [

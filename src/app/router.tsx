@@ -20,6 +20,7 @@ import { CribAdvanced } from '@/pages/crib/advanced'
 import { CribContext } from '@/pages/crib/context'
 import { CribReactRouter } from '@/pages/crib/route'
 import { UserProfile } from '@/pages/crib/user-profile'
+import { CribForms } from '@/pages/crib/form'
 
 export const router = createBrowserRouter(
   [
@@ -47,7 +48,7 @@ export const router = createBrowserRouter(
         { path: 'components', element: <CribComponents /> },
         { path: 'props', element: <CribProps /> },
         { path: 'state', element: <CribState /> },
-        { path: 'lifecycle', element: <CribLifecycle /> },
+        { path: 'class-component', element: <CribLifecycle /> },
         { path: 'events', element: <CribEvents /> },
         { path: 'advanced', element: <CribAdvanced /> },
         { path: 'context', element: <CribContext /> },
@@ -58,7 +59,7 @@ export const router = createBrowserRouter(
             { path: 'users/1', element: <UserProfile /> },
           ],
         },
-        // { path: 'forms', element: < /> },
+        { path: 'forms', element: <CribForms /> },
         // { path: 'storage', element: < /> },
         // { path: 'hoc', element: < /> },
       ],

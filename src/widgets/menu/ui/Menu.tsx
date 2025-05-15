@@ -47,7 +47,7 @@ const cribItems = [
   { key: 'components', label: 'Components', icon: <FileOutlined /> },
   { key: 'props', label: 'Props', icon: <FileOutlined /> },
   { key: 'state', label: 'State Management', icon: <FileOutlined /> },
-  { key: 'lifecycle', label: 'React Class component', icon: <FileOutlined /> },
+  { key: 'class-component', label: 'React Class component', icon: <FileOutlined /> },
   { key: 'events', label: 'Events', icon: <FileOutlined /> },
   { key: 'advanced', label: 'React Advanced', icon: <FileOutlined /> },
   { key: 'context', label: 'Context', icon: <FileOutlined /> },

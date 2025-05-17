@@ -22,6 +22,7 @@ import { CribReactRouter } from '@/pages/crib/route'
 import { UserProfile } from '@/pages/crib/user-profile'
 import { CribForms } from '@/pages/crib/form'
 import { CribStorage } from '@/pages/crib/storage'
+import { CribHOC } from '@/pages/crib/HOC'
 
 export const router = createBrowserRouter(
   [
@@ -62,7 +63,7 @@ export const router = createBrowserRouter(
         },
         { path: 'forms', element: <CribForms /> },
         { path: 'storage', element: <CribStorage /> },
-        // { path: 'hoc', element: < /> },
+        { path: 'hoc', element: <CribHOC /> },
       ],
     },
     {

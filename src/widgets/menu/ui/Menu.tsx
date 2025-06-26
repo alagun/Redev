@@ -62,6 +62,7 @@ const items: MenuItem[] = [
   getItem('Task 6', 'crib', <FolderOutlined />, [
     ...cribItems.map(item => getItem(item.label, item.key, item.icon)),
   ]),
+  getItem('ToDo', 'todo-list', <TagsOutlined />),
   getItem('In Progress', 'in-progress', <TagsOutlined />),
 ]
 

@@ -23,6 +23,7 @@ import { UserProfile } from '@/pages/crib/user-profile'
 import { CribForms } from '@/pages/crib/form'
 import { CribStorage } from '@/pages/crib/storage'
 import { CribHOC } from '@/pages/crib/HOC'
+import { TodoPage } from '@/pages/todo'
 
 export const router = createBrowserRouter(
   [
@@ -37,6 +38,7 @@ export const router = createBrowserRouter(
         { path: 'theme', element: <ThemeToggle /> },
         { path: 'in-progress', element: <InProgress /> },
         { path: 'registration', element: <RegistrationPage /> },
+        { path: 'todo-list', element: <TodoPage /> },
       ],
     },
     {

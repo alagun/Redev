@@ -24,6 +24,8 @@ import { CribForms } from '@/pages/crib/form'
 import { CribStorage } from '@/pages/crib/storage'
 import { CribHOC } from '@/pages/crib/HOC'
 import { TodoPage } from '@/pages/todo'
+import { LoginPage } from '@/pages/login'
+import { ProtectedRoute } from '@/shared/ui/protected-route/ProtectedRoute'
 
 export const router = createBrowserRouter(
   [
@@ -32,18 +34,71 @@ export const router = createBrowserRouter(
       element: <App />,
       errorElement: <NotFoundPage />,
       children: [
-        { index: true, element: <ParentComponent /> },
-        { path: 'lifecycle', element: <LifecycleTask /> },
-        { path: 'list', element: <ListTask /> },
-        { path: 'theme', element: <ThemeToggle /> },
-        { path: 'in-progress', element: <InProgress /> },
-        { path: 'registration', element: <RegistrationPage /> },
-        { path: 'todo-list', element: <TodoPage /> },
+        {
+          index: true,
+          element: (
+            <ProtectedRoute>
+              <ParentComponent />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: 'login',
+          element: <LoginPage />,
+        },
+        {
+          path: 'registration',
+          element: <RegistrationPage />,
+        },
+        {
+          path: 'lifecycle',
+          element: (
+            <ProtectedRoute>
+              <LifecycleTask />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: 'list',
+          element: (
+            <ProtectedRoute>
+              <ListTask />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: 'theme',
+          element: (
+            <ProtectedRoute>
+              <ThemeToggle />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: 'in-progress',
+          element: (
+            <ProtectedRoute>
+              <InProgress />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: 'todo-list',
+          element: (
+            <ProtectedRoute>
+              <TodoPage />
+            </ProtectedRoute>
+          ),
+        },
       ],
     },
     {
       path: '/crib',
-      element: <App />,
+      element: (
+        <ProtectedRoute>
+          <App />
+        </ProtectedRoute>
+      ),
       children: [
         { path: 'roadmap', element: <CribRoadmap /> },
         { path: 'react', element: <Introduction /> },
@@ -70,7 +125,11 @@ export const router = createBrowserRouter(
     },
     {
       path: '*',
-      element: <NotFoundPage />,
+      element: (
+        <ProtectedRoute>
+          <NotFoundPage />
+        </ProtectedRoute>
+      ),
     },
   ],
   {

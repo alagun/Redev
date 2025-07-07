@@ -2,13 +2,18 @@ import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, DatePicker, Form, Input, Radio, Modal } from 'antd'
 import dayjs from 'dayjs'
+import { useNavigate } from 'react-router-dom'
 
 import { registrationSchema } from '../lib/ValidationSchema'
 import { TRegistrationForm } from '../models/registration'
+import { register } from '@/feature/auth/api/auth'
 
 import styles from './RegistrationForm.module.scss'
 
 export const RegistrationForm = () => {
+
+  const navigate = useNavigate()
+
   const {
     control,
     handleSubmit,
@@ -26,16 +31,30 @@ export const RegistrationForm = () => {
     },
   })
 
-  const onSubmit = (data: TRegistrationForm) => {
-    Modal.success({
-      title: 'Успешная регистрация!',
-      content: (
-        <pre style={{ whiteSpace: 'pre-wrap' }}>
-          {JSON.stringify(data, null, 2)}
-        </pre>
-      ),
-    })
+  const onSubmit = async (data: TRegistrationForm) => {
+    try {
+      await register(data)
+
+      Modal.success({
+        title: 'Успешная регистрация!',
+        content: 'Теперь вы можете войти в систему',
+        onOk: () => navigate('/login'),
+      })
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error:any) {
+      const serverMessage = error.response?.data?.message
+      const defaultMessage = 'Произошла ошибка при регистрации'
+
+      Modal.error({
+        title: 'Ошибка',
+        content: serverMessage || defaultMessage,
+      })
+    }
+
   }
+
+
 
   return (
     <Form onFinish={handleSubmit(onSubmit)} layout='vertical' className={styles.registrationForm}>

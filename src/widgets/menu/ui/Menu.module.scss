@@ -83,10 +83,22 @@
     }
   }
 
-  .userPanel {
-    padding: 16px;
-    border-bottom: 1px solid #303030;
+.userPanel {
+  padding: 16px;
+  border-bottom: 1px solid #303030;
+  display: flex;
+  justify-content: center;
+  
+  .userAvatar {
+    width: 100%;
     display: flex;
     justify-content: center;
+    
+    .ant-space {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
   }
+}
 }

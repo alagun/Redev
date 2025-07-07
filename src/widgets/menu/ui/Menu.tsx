@@ -96,7 +96,7 @@ const Menu = () => {
   return (
     <div className={styles.menuContainer}>
       <div className={styles.userPanel}>
-        <UserAvatar />
+        <UserAvatar collapsed={collapsed}/>
       </div>
       <div className={styles.menuBtn}>
         <Button

@@ -4,7 +4,11 @@ import { useLogout } from '../../lib/useLogout'
 
 import styles from './UserAvatar.module.scss'
 
-export const UserAvatar = () => {
+interface UserAvatarProps {
+  collapsed?: boolean;
+}
+
+export const UserAvatar = ({ collapsed }: UserAvatarProps) => {
   const { handleLogout } = useLogout()
 
   const items: MenuProps['items'] = [
@@ -21,7 +25,7 @@ export const UserAvatar = () => {
       <Dropdown menu={{ items }} trigger={['click']}>
         <Space >
           <Avatar icon={<UserOutlined />} />
-          <Typography.Text type='secondary'>Пользователь</Typography.Text>
+          {!collapsed && <Typography.Text type='secondary'>Пользователь</Typography.Text>}
         </Space>
       </Dropdown>
     </div>

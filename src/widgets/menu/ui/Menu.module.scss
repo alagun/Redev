@@ -10,7 +10,7 @@
 	display: flex;
 	flex-direction: column;
 
-  .menuBtn{
+  .menuBtn, .userPanel{
     background: var(--bg-menu) !important;
     transition: 
       background-color var(--transition-duration) var(--transition-timing-fn),
@@ -82,4 +82,23 @@
       }
     }
   }
+
+.userPanel {
+  padding: 16px;
+  border-bottom: 1px solid #303030;
+  display: flex;
+  justify-content: center;
+  
+  .userAvatar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+    .ant-space {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+}
 }

@@ -1,0 +1,57 @@
+.taskList {
+	min-height: 300px;
+	width: 400px;
+	
+  .taskItem{
+	padding: 12px;
+	border-radius: 4px;
+	margin-bottom: 8px;
+	background: #fff;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+	transition: all 0.3s;
+  
+	&:hover {
+	  background: #f5f5f5;
+	}
+
+	.ant-list-item{
+	//   width: 100%;
+	  background-color: red;
+	}
+  }
+  
+  .completed {
+	opacity: 0.7;
+	.taskText {
+	  text-decoration: line-through;
+	}
+  }
+  
+  .taskText {
+	flex-grow: 1;
+	margin-right: 16px;
+  }
+  
+  .taskActions {
+	display: flex;
+	gap: 8px;
+  }
+
+  .completedIcon,
+  .doIcon {
+    width: 2rem;
+    height: 2rem;
+	margin-left: 8px;
+  }
+  
+  .completedIcon {
+	color: #52c41a;
+  }
+
+  .doIcon {
+	color: #a2a7a0;
+  }
+}

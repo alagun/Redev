@@ -10,6 +10,8 @@ import {
   FolderOutlined,
 } from '@ant-design/icons'
 import { ThemeSwitch } from '@/shared/theme-switch'
+import { useAuth } from '@/feature/auth/lib/useAuth'
+import { UserAvatar } from '@/feature/auth/ui'
 
 import styles from './Menu.module.scss'
 
@@ -62,14 +64,19 @@ const items: MenuItem[] = [
   getItem('Task 6', 'crib', <FolderOutlined />, [
     ...cribItems.map(item => getItem(item.label, item.key, item.icon)),
   ]),
+  getItem('ToDo', 'todo-list', <TagsOutlined />),
   getItem('In Progress', 'in-progress', <TagsOutlined />),
 ]
 
 const Menu = () => {
+  const { isAuth } = useAuth()
+
   const navigate = useNavigate()
   const location = useLocation()
 
   const [collapsed, setCollapsed] = useState(false)
+
+  if (!isAuth) return null
 
   const toggleCollapsed = () => {
     setCollapsed(!collapsed)
@@ -88,6 +95,9 @@ const Menu = () => {
 
   return (
     <div className={styles.menuContainer}>
+      <div className={styles.userPanel}>
+        <UserAvatar collapsed={collapsed}/>
+      </div>
       <div className={styles.menuBtn}>
         <Button
           type='primary'

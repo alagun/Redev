@@ -21,7 +21,7 @@ export function TaskList ({ tasks, onToggle, onDelete, onUpdate, log }: TaskList
   const handleEditStart = (task: ITodo) => {
     log?.('User started editing task', { task })
     setEditingId(task.id)
-    setEditText(task.text)
+    setEditText(task.title)
   }
 
   const handleEditSave = (id: string) => {
@@ -38,7 +38,7 @@ export function TaskList ({ tasks, onToggle, onDelete, onUpdate, log }: TaskList
       dataSource={tasks}
       renderItem={task => (
         <List.Item
-          className={`${styles.taskItem} ${task.completed ? styles.completed : ''}`}
+          className={`${styles.taskItem} ${task.isCompleted ? styles.completed : ''}`}
           onClick={() => {
             if (editingId !== task.id) {
               log?.('User toggled task completion', { task })
@@ -57,10 +57,10 @@ export function TaskList ({ tasks, onToggle, onDelete, onUpdate, log }: TaskList
           ) : (
             <>
               <Typography.Text
-                delete={task.completed}
+                delete={task.isCompleted}
                 className={styles.taskText}
               >
-                {task.text}
+                {task.title}
               </Typography.Text>
               <div className={styles.taskActions}>
                 <Button
@@ -79,7 +79,7 @@ export function TaskList ({ tasks, onToggle, onDelete, onUpdate, log }: TaskList
                     onDelete(task.id)
                   }}
                 />
-                <CheckOutlined className={task.completed ? styles.completedIcon : styles.doIcon} />
+                <CheckOutlined className={task.isCompleted ? styles.completedIcon : styles.doIcon} />
               </div>
             </>
           )}

@@ -1,37 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Modal } from 'antd'
-import { todoApi } from '../api/todoApi'
-import { ITodo } from '../models/Todo'
+import { useCreateTodoMutation, useDeleteTodoMutation, useGetTodosQuery, useToggleTodoMutation, useUpdateTodoMutation } from '../api/todoApi'
+
 
 export const useTodo = () => {
-  const [tasks, setTasks] = useState<ITodo[]>([])
   const [inputValue, setInputValue] = useState('')
-  const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    fetchTodos()
-  }, [])
+  const { data: tasks = [], isLoading } = useGetTodosQuery()
+  const [createTodo] = useCreateTodoMutation()
+  const [toggleTodo] = useToggleTodoMutation()
+  const [deleteTodo] = useDeleteTodoMutation()
+  const [updateTodo] = useUpdateTodoMutation()
 
   const showError = (content: string) => {
     Modal.error({
       title: 'Ошибка',
       content,
     })
-  }
-
-  const fetchTodos = async () => {
-    setLoading(true)
-
-    try {
-      const todos = await todoApi.getTodos()
-
-      setTasks(todos)
-    } catch (error) {
-      showError('Не удалось загрузить задачи')
-      console.error('Failed to fetch todos:', error)
-    } finally {
-      setLoading(false)
-    }
   }
 
   const addTask = async () => {
@@ -41,14 +25,9 @@ export const useTodo = () => {
       return
     }
 
-    setLoading(true)
-
     try {
-      const newTask = await todoApi.createTodo(inputValue)
-
-      setTasks([...tasks, newTask])
+      await createTodo({ title: inputValue }).unwrap()
       setInputValue('')
-
       Modal.success({
         title: 'Успешно!',
         content: 'Задача добавлена',
@@ -56,17 +35,12 @@ export const useTodo = () => {
     } catch (error) {
       showError('Не удалось добавить задачу')
       console.error('Failed to add task:', error)
-    } finally {
-      setLoading(false)
     }
   }
 
   const toggleTask = async (id: string) => {
     try {
-      const updatedTask = await todoApi.toggleTodoCompletion(id)
-
-      setTasks(tasks.map(task => task.id === id ? updatedTask[0] : task,
-      ))
+      await toggleTodo(id).unwrap()
     } catch (error) {
       showError('Не удалось изменить статус задачи')
       console.error('Failed to toggle task:', error)
@@ -81,9 +55,7 @@ export const useTodo = () => {
       cancelText: 'Отмена',
       onOk: async () => {
         try {
-          await todoApi.deleteTodo(id)
-          setTasks(tasks.filter(task => task.id !== id))
-
+          await deleteTodo(id).unwrap()
           Modal.success({
             title: 'Успешно!',
             content: 'Задача удалена',
@@ -104,10 +76,7 @@ export const useTodo = () => {
     }
 
     try {
-      const updatedTask = await todoApi.updateTodoText(id, text)
-
-      setTasks(tasks.map(task => task.id === id ? updatedTask : task,
-      ))
+      await updateTodo({ id, title: text }).unwrap()
     } catch (error) {
       showError('Не удалось обновить задачу')
       console.error('Failed to update task:', error)
@@ -122,6 +91,6 @@ export const useTodo = () => {
     toggleTask,
     deleteTask,
     updateTask,
-    loading,
+    loading: isLoading,
   }
 }

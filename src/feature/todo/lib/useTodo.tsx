@@ -1,37 +1,43 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Modal } from 'antd'
-import { todoApi } from '../api/todoApi'
-import { ITodo } from '../models/Todo'
+import { useCreateTodoMutation, useDeleteTodoMutation, useGetTodosQuery, useToggleTodoMutation, useUpdateTodoMutation } from '../api/todoApi'
+import {
+  setTasks,
+  addTask as addTaskAction,
+  toggleTask as toggleTaskAction,
+  updateTask as updateTaskAction,
+  deleteTask as deleteTaskAction,
+  setLoading,
+  setError,
+} from '../slice/todoSlice'
+import { useAppDispatch } from '@/shared/hook/redux'
+
 
 export const useTodo = () => {
-  const [tasks, setTasks] = useState<ITodo[]>([])
+  const dispatch = useAppDispatch()
+
   const [inputValue, setInputValue] = useState('')
-  const [loading, setLoading] = useState(false)
+
+  const { data } = useGetTodosQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  })
 
   useEffect(() => {
-    fetchTodos()
-  }, [])
+    if (data) {
+      dispatch(setTasks(data))
+    }
+  }, [data, dispatch])
+
+  const [createTodo] = useCreateTodoMutation()
+  const [toggleTodo] = useToggleTodoMutation()
+  const [deleteTodo] = useDeleteTodoMutation()
+  const [updateTodo] = useUpdateTodoMutation()
 
   const showError = (content: string) => {
     Modal.error({
       title: 'Ошибка',
       content,
     })
-  }
-
-  const fetchTodos = async () => {
-    setLoading(true)
-
-    try {
-      const todos = await todoApi.getTodos()
-
-      setTasks(todos)
-    } catch (error) {
-      showError('Не удалось загрузить задачи')
-      console.error('Failed to fetch todos:', error)
-    } finally {
-      setLoading(false)
-    }
   }
 
   const addTask = async () => {
@@ -41,14 +47,13 @@ export const useTodo = () => {
       return
     }
 
-    setLoading(true)
-
     try {
-      const newTask = await todoApi.createTodo(inputValue)
+      dispatch(setLoading(true))
+      const newTask = await createTodo({ title: inputValue }).unwrap()
 
-      setTasks([...tasks, newTask])
+      dispatch(addTaskAction(newTask))
+
       setInputValue('')
-
       Modal.success({
         title: 'Успешно!',
         content: 'Задача добавлена',
@@ -56,20 +61,18 @@ export const useTodo = () => {
     } catch (error) {
       showError('Не удалось добавить задачу')
       console.error('Failed to add task:', error)
-    } finally {
-      setLoading(false)
+      dispatch(setError('Не удалось добавить задачу'))
     }
   }
 
   const toggleTask = async (id: string) => {
     try {
-      const updatedTask = await todoApi.toggleTodoCompletion(id)
-
-      setTasks(tasks.map(task => task.id === id ? updatedTask[0] : task,
-      ))
+      await toggleTodo(id).unwrap()
+      dispatch(toggleTaskAction(id))
     } catch (error) {
       showError('Не удалось изменить статус задачи')
       console.error('Failed to toggle task:', error)
+      dispatch(setError('Не удалось изменить статус задачи'))
     }
   }
 
@@ -81,9 +84,8 @@ export const useTodo = () => {
       cancelText: 'Отмена',
       onOk: async () => {
         try {
-          await todoApi.deleteTodo(id)
-          setTasks(tasks.filter(task => task.id !== id))
-
+          await deleteTodo(id).unwrap()
+          dispatch(deleteTaskAction(id))
           Modal.success({
             title: 'Успешно!',
             content: 'Задача удалена',
@@ -91,6 +93,7 @@ export const useTodo = () => {
         } catch (error) {
           showError('Не удалось удалить задачу')
           console.error('Failed to delete task:', error)
+          dispatch(setError('Не удалось удалить задачу'))
         }
       },
     })
@@ -104,24 +107,21 @@ export const useTodo = () => {
     }
 
     try {
-      const updatedTask = await todoApi.updateTodoText(id, text)
-
-      setTasks(tasks.map(task => task.id === id ? updatedTask : task,
-      ))
+      await updateTodo({ id, title: text }).unwrap()
+      dispatch(updateTaskAction({ id, title: text }))
     } catch (error) {
       showError('Не удалось обновить задачу')
       console.error('Failed to update task:', error)
+      dispatch(setError('Не удалось обновить задачу'))
     }
   }
 
   return {
-    tasks,
     inputValue,
     setInputValue,
     addTask,
     toggleTask,
     deleteTask,
     updateTask,
-    loading,
   }
 }

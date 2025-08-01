@@ -5,11 +5,15 @@ import ThemeProvider from './app/providers/ThemeProvider'
 import { router } from './app/router'
 import 'antd/dist/reset.css'
 import './app/styles/index.scss'
+import { Provider } from 'react-redux'
+import { store } from './app/providers/StoreProvider'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <Provider store= {store}>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </Provider>
   </StrictMode>,
 )

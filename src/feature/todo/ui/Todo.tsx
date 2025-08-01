@@ -11,7 +11,6 @@ interface TodoProps {
 
 export function Todo ({ log }:TodoProps) {
   const {
-    tasks,
     inputValue,
     setInputValue,
     addTask,
@@ -31,7 +30,6 @@ export function Todo ({ log }:TodoProps) {
         log={log}
       />
       <TaskList
-        tasks={tasks}
         onToggle={toggleTask}
         onDelete={deleteTask}
         onUpdate={updateTask}

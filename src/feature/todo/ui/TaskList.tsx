@@ -4,9 +4,9 @@ import { EditOutlined, DeleteOutlined, CheckOutlined } from '@ant-design/icons'
 import { ITodo } from '../models/Todo'
 
 import styles from './TaskList.module.scss'
+import { useAppSelector } from '@/shared/hook/redux'
 
 interface TaskListProps {
-  tasks: ITodo[];
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
   onUpdate: (id: string, text: string) => void;
@@ -14,7 +14,8 @@ interface TaskListProps {
   log?: (message: string, data?: any) => void;
 }
 
-export function TaskList ({ tasks, onToggle, onDelete, onUpdate, log }: TaskListProps) {
+export function TaskList ({ onToggle, onDelete, onUpdate, log }: TaskListProps) {
+  const tasks = useAppSelector(state => state.todos.tasks)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editText, setEditText] = useState('')
 

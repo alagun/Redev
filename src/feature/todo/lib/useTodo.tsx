@@ -1,11 +1,33 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Modal } from 'antd'
 import { useCreateTodoMutation, useDeleteTodoMutation, useGetTodosQuery, useToggleTodoMutation, useUpdateTodoMutation } from '../api/todoApi'
+import {
+  setTasks,
+  addTask as addTaskAction,
+  toggleTask as toggleTaskAction,
+  updateTask as updateTaskAction,
+  deleteTask as deleteTaskAction,
+  setLoading,
+  setError,
+} from '../slice/todoSlice'
+import { useAppDispatch } from '@/shared/hook/redux'
 
 
 export const useTodo = () => {
+  const dispatch = useAppDispatch()
+
   const [inputValue, setInputValue] = useState('')
-  const { data: tasks = [], isLoading } = useGetTodosQuery()
+
+  const { data } = useGetTodosQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  })
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setTasks(data))
+    }
+  }, [data, dispatch])
+
   const [createTodo] = useCreateTodoMutation()
   const [toggleTodo] = useToggleTodoMutation()
   const [deleteTodo] = useDeleteTodoMutation()
@@ -26,7 +48,11 @@ export const useTodo = () => {
     }
 
     try {
-      await createTodo({ title: inputValue }).unwrap()
+      dispatch(setLoading(true))
+      const newTask = await createTodo({ title: inputValue }).unwrap()
+
+      dispatch(addTaskAction(newTask))
+
       setInputValue('')
       Modal.success({
         title: 'Успешно!',
@@ -35,15 +61,18 @@ export const useTodo = () => {
     } catch (error) {
       showError('Не удалось добавить задачу')
       console.error('Failed to add task:', error)
+      dispatch(setError('Не удалось добавить задачу'))
     }
   }
 
   const toggleTask = async (id: string) => {
     try {
       await toggleTodo(id).unwrap()
+      dispatch(toggleTaskAction(id))
     } catch (error) {
       showError('Не удалось изменить статус задачи')
       console.error('Failed to toggle task:', error)
+      dispatch(setError('Не удалось изменить статус задачи'))
     }
   }
 
@@ -56,6 +85,7 @@ export const useTodo = () => {
       onOk: async () => {
         try {
           await deleteTodo(id).unwrap()
+          dispatch(deleteTaskAction(id))
           Modal.success({
             title: 'Успешно!',
             content: 'Задача удалена',
@@ -63,6 +93,7 @@ export const useTodo = () => {
         } catch (error) {
           showError('Не удалось удалить задачу')
           console.error('Failed to delete task:', error)
+          dispatch(setError('Не удалось удалить задачу'))
         }
       },
     })
@@ -77,20 +108,20 @@ export const useTodo = () => {
 
     try {
       await updateTodo({ id, title: text }).unwrap()
+      dispatch(updateTaskAction({ id, title: text }))
     } catch (error) {
       showError('Не удалось обновить задачу')
       console.error('Failed to update task:', error)
+      dispatch(setError('Не удалось обновить задачу'))
     }
   }
 
   return {
-    tasks,
     inputValue,
     setInputValue,
     addTask,
     toggleTask,
     deleteTask,
     updateTask,
-    loading: isLoading,
   }
 }

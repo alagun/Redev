@@ -2,8 +2,6 @@ import { useTodo } from '../lib/useTodo'
 import { TaskInput } from './TaskInput'
 import { TaskList } from './TaskList'
 
-// import styles from './Todo.module.scss'
-
 interface TodoProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   log?: (message: string, data?: any) => void;
@@ -13,6 +11,8 @@ export function Todo ({ log }:TodoProps) {
   const {
     inputValue,
     setInputValue,
+    tasks,
+    isLoading,
     addTask,
     toggleTask,
     deleteTask,
@@ -20,9 +20,7 @@ export function Todo ({ log }:TodoProps) {
   } = useTodo()
 
   return (
-    // <div className={styles.todoContainer}>
     <div>
-      <h1>Todo List</h1>
       <TaskInput
         value={inputValue}
         onChange={setInputValue}
@@ -30,6 +28,8 @@ export function Todo ({ log }:TodoProps) {
         log={log}
       />
       <TaskList
+        tasks={tasks}
+        isLoading={isLoading}
         onToggle={toggleTask}
         onDelete={deleteTask}
         onUpdate={updateTask}
